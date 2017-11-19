@@ -14,3 +14,13 @@ Features:
 
 ## Motivation
 I play the bass and I was in need of some drums to study rhytms.
+
+## Build instructions
+You need SDL2 library together with SDL2 mixer and image. Project is buildable using c99 standard.
+
+```
+cd px-drummer
+make
+```
+
+After compilation the binary should be in bin folder.

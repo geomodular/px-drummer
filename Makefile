@@ -7,7 +7,7 @@ DEPS   = $(OBJS:.o=.d)
 
 #CPPFLAGS =
 LIBS     = -lSDL2 -lSDL2_mixer -lSDL2_image
-CFLAGS   = -std=c11 -Wall -pedantic -ggdb -fsanitize=undefined -fsanitize=address
+CFLAGS   = -std=c99 -Wall -pedantic -g
 MAIN     = $(BINDIR)/pxdrummer
 
 .PHONY: all clean

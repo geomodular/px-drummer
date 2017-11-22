@@ -40,7 +40,7 @@ int main(int argc, char **argv)
 		SDL_Quit();
 		return EXIT_FAILURE;
 	}
-	
+
 	Mix_Chunk* kick = Mix_LoadWAV("./assets/kick.wav");
 	Mix_Chunk* snare = Mix_LoadWAV("./assets/snare.wav");
 	Mix_Chunk* tom1 = Mix_LoadWAV("./assets/tom1.wav");
@@ -142,6 +142,20 @@ int main(int argc, char **argv)
 				screen_mouse_down(e.button.x, e.button.y);
 			} else if (e.type == SDL_MOUSEBUTTONUP) {
 				screen_mouse_up(e.button.x, e.button.y);
+			} else if (e.type == SDL_KEYDOWN) {
+				if (e.key.keysym.sym == SDLK_SPACE) {
+					if (pstate.state == IDLE) {
+						pstate.state = PLAYING;
+						widget_disable(&btn_play);
+						widget_enable(&btn_stop);
+					} else if (pstate.state == PLAYING) {
+						pstate.state = IDLE;
+						widget_disable(&btn_stop);
+						widget_enable(&btn_play);
+						pstate.t_sum = 0;
+						pstate.counter = 0;
+					}
+				}
 			} else if (e.type == BTN_PLAY_EVENT) {
 				pstate.state = PLAYING;
 				widget_disable(&btn_play);
@@ -251,7 +265,7 @@ int main(int argc, char **argv)
 				int pattern_index = position / pstate.measure;
 				int block_index = position % pstate.measure;
 				int value;
-				
+
 				value = pstate.blocks[pattern_index][0][block_index];
 				if (value == 1 && pstate.muted[0] == SDL_FALSE) Mix_PlayChannel(-1, hihat2, 0);
 				value = pstate.blocks[pattern_index][1][block_index];
@@ -267,7 +281,7 @@ int main(int argc, char **argv)
 
 				if (pstate.locked == SDL_TRUE && block_index == 0)
 					track_set_offset(&track, pattern_index * pstate.measure * 8);
-				
+
 				pstate.t_sum -= tick;
 				pstate.counter++;
 			}

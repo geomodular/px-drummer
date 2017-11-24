@@ -4,11 +4,17 @@ SRCDIR = ./src
 SRCS   = $(wildcard $(SRCDIR)/*.c)
 OBJS   = $(addprefix $(BLDDIR)/, $(notdir $(SRCS:.c=.o)))
 DEPS   = $(OBJS:.o=.d)
+MODE   =
 
-#CPPFLAGS =
 LIBS     = -lSDL2 -lSDL2_mixer -lSDL2_image
-CFLAGS   = -std=c99 -Wall -pedantic -g
+CFLAGS   = -std=c99 -Wall -pedantic
 MAIN     = $(BINDIR)/pxdrummer
+
+ifeq ($(MODE),debug)
+		CFLAGS += -g
+else
+		CFLAGS += -O2
+endif
 
 .PHONY: all clean
 

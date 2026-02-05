@@ -1,7 +1,7 @@
 #include <stdarg.h>
 #include "blitter.h"
 
-void blit(const struct Blitter* blitter, int x, int y, int index)
+void blit(const Blitter* blitter, int x, int y, int index)
 {
 	int w = blitter->tile_width;
 	int h = blitter->tile_height;
@@ -21,7 +21,7 @@ void blit(const struct Blitter* blitter, int x, int y, int index)
 	);
 }
 
-void blit_ex(const struct Blitter* blitter, int x, int y, int count, ...)
+void blit_ex(const Blitter* blitter, int x, int y, int count, ...)
 {
 	int w = blitter->tile_width;
 	int h = blitter->tile_height;

@@ -7,7 +7,7 @@ typedef void (*widget_draw)(void* instance);
 typedef void (*widget_click)(void* instance);
 typedef void (*widget_drag)(void* instance, int last_x, int last_y);
 
-struct Widget {
+typedef struct Widget {
 	SDL_Rect rect;
 
 	struct {
@@ -25,9 +25,9 @@ struct Widget {
 	widget_click click;
 	widget_down_delayed down_delayed; // Could be NULL
 	widget_drag drag; // Could be NULL
-};
+} Widget;
 
-struct Widget widget_init();
+Widget widget_init(void);
 void widget_set_down_delayed(void* widget, widget_down_delayed down_delayed);
 void widget_set_draw(void* widget, widget_draw draw);
 void widget_set_click(void* widget, widget_click click);

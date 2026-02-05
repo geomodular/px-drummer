@@ -5,22 +5,22 @@
 #include "widget.h"
 #include "state.h"
 
-struct Button
+typedef struct Button
 {
 	struct Widget widget;
 	const struct Blitter* blitter;
 	Uint32 event;
-};
+} Button;
 
-struct Button btn_play_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_stop_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_tleft_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_tright_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_mleft_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_mright_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_plus_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_minus_init(const struct Blitter* blitter, Uint32 event);
-struct Button btn_clear_init(const struct Blitter* blitter, Uint32 event);
+Button btn_play_init(const struct Blitter* blitter, Uint32 event);
+Button btn_stop_init(const struct Blitter* blitter, Uint32 event);
+Button btn_tleft_init(const struct Blitter* blitter, Uint32 event);
+Button btn_tright_init(const struct Blitter* blitter, Uint32 event);
+Button btn_mleft_init(const struct Blitter* blitter, Uint32 event);
+Button btn_mright_init(const struct Blitter* blitter, Uint32 event);
+Button btn_plus_init(const struct Blitter* blitter, Uint32 event);
+Button btn_minus_init(const struct Blitter* blitter, Uint32 event);
+Button btn_clear_init(const struct Blitter* blitter, Uint32 event);
 
 struct Switch
 {

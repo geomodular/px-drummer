@@ -6,7 +6,7 @@
 
 static void click(void* instance)
 {
-	const struct Button* btn = instance;
+	const Button* btn = instance;
 	SDL_Event event;
 	event.type = btn->event;
 	SDL_PushEvent(&event);
@@ -14,7 +14,7 @@ static void click(void* instance)
 
 static void draw_play(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -41,13 +41,15 @@ static void draw_play(void* instance)
 	}
 }
 
-inline struct Button btn_play_init(const struct Blitter* blitter, Uint32 event)
+Button btn_play_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {8, 16, 16, 16},
-		.widget.draw = draw_play,
-		.widget.click = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {8, 16, 16, 16};
+	widget.draw = draw_play;
+	widget.click = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -55,7 +57,7 @@ inline struct Button btn_play_init(const struct Blitter* blitter, Uint32 event)
 
 static void draw_stop(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -82,14 +84,16 @@ static void draw_stop(void* instance)
 	}
 }
 
-inline struct Button btn_stop_init(const struct Blitter* blitter, Uint32 event)
+Button btn_stop_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {24, 16, 16, 16},
-		.widget.draw = draw_stop,
-		.widget.click = click,
-		.widget.disabled = SDL_TRUE,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {24, 16, 16, 16};
+	widget.draw = draw_stop;
+	widget.click = click;
+	widget.disabled = SDL_TRUE;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -97,7 +101,7 @@ inline struct Button btn_stop_init(const struct Blitter* blitter, Uint32 event)
 
 static void draw_left(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -119,14 +123,16 @@ static void draw_left(void* instance)
 }
 
 // Tempo LEFT
-inline struct Button btn_tleft_init(const struct Blitter* blitter, Uint32 event)
+Button btn_tleft_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {136, 24, 8, 8},
-		.widget.draw = draw_left,
-		.widget.click = click,
-		.widget.down_delayed = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {136, 24, 8, 8};
+	widget.draw = draw_left;
+	widget.click = click;
+	widget.down_delayed = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -134,7 +140,7 @@ inline struct Button btn_tleft_init(const struct Blitter* blitter, Uint32 event)
 
 static void draw_right(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -156,40 +162,46 @@ static void draw_right(void* instance)
 }
 
 // Tempo RIGHT
-inline struct Button btn_tright_init(const struct Blitter* blitter, Uint32 event)
+Button btn_tright_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {144, 24, 8, 8},
-		.widget.draw = draw_right,
-		.widget.click = click,
-		.widget.down_delayed = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {144, 24, 8, 8};
+	widget.draw = draw_right;
+	widget.click = click;
+	widget.down_delayed = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
 }
 
 // Measure LEFT
-inline struct Button btn_mleft_init(const struct Blitter* blitter, Uint32 event)
+Button btn_mleft_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {136, 16, 8, 8},
-		.widget.draw = draw_left,
-		.widget.click = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {136, 16, 8, 8};
+	widget.draw = draw_left;
+	widget.click = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
 }
 
 // Measure RIGHT
-inline struct Button btn_mright_init(const struct Blitter* blitter, Uint32 event)
+Button btn_mright_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {144, 16, 8, 8},
-		.widget.draw = draw_right,
-		.widget.click = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {144, 16, 8, 8};
+	widget.draw = draw_right;
+	widget.click = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -197,7 +209,7 @@ inline struct Button btn_mright_init(const struct Blitter* blitter, Uint32 event
 
 static void draw_plus(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -218,13 +230,15 @@ static void draw_plus(void* instance)
 	}
 }
 
-inline struct Button btn_plus_init(const struct Blitter* blitter, Uint32 event)
+Button btn_plus_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {8, 40, 8, 8},
-		.widget.draw = draw_plus,
-		.widget.click = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {8, 40, 8, 8};
+	widget.draw = draw_plus;
+	widget.click = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -232,7 +246,7 @@ inline struct Button btn_plus_init(const struct Blitter* blitter, Uint32 event)
 
 static void draw_minus(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -253,13 +267,15 @@ static void draw_minus(void* instance)
 	}
 }
 
-inline struct Button btn_minus_init(const struct Blitter* blitter, Uint32 event)
+Button btn_minus_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {8, 48, 8, 8},
-		.widget.draw = draw_minus,
-		.widget.click = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {8, 48, 8, 8};
+	widget.draw = draw_minus;
+	widget.click = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -267,7 +283,7 @@ inline struct Button btn_minus_init(const struct Blitter* blitter, Uint32 event)
 
 static void draw_clear(void* instance)
 {
-	struct Button* btn = instance;
+	Button* btn = instance;
 	int x = btn->widget.rect.x;
 	int y = btn->widget.rect.y;
 
@@ -288,13 +304,15 @@ static void draw_clear(void* instance)
 	}
 }
 
-inline struct Button btn_clear_init(const struct Blitter* blitter, Uint32 event)
+Button btn_clear_init(const struct Blitter* blitter, Uint32 event)
 {
-	return (struct Button) {
-		.widget = widget_init(),
-		.widget.rect = {48, 16, 16, 8},
-		.widget.draw = draw_clear,
-		.widget.click = click,
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {48, 16, 16, 8};
+	widget.draw = draw_clear;
+	widget.click = click;
+
+	return (Button) {
+		.widget = widget,
 		.blitter = blitter,
 		.event = event
 	};
@@ -332,13 +350,15 @@ static void draw_mute(void* instance)
 }
 
 static int __mute_index = 0;
-inline struct Switch sw_mute_init(const struct Blitter* blitter, Uint32 event, const SDL_bool* value)
+struct Switch sw_mute_init(const struct Blitter* blitter, Uint32 event, const SDL_bool* value)
 {
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {8, 80 + (__mute_index++) * 8, 8, 8};
+	widget.draw = draw_mute;
+	widget.click = click;
+
 	return (struct Switch) {
-		.widget = widget_init(),
-		.widget.rect = {8, 80 + (__mute_index++) * 8, 8, 8},
-		.widget.draw = draw_mute,
-		.widget.click = click,
+		.widget = widget,
 		.blitter = blitter,
 		.event = event,
 		.value = value
@@ -379,11 +399,13 @@ static void draw_lock(void* instance)
 
 struct Switch sw_lock_init(const struct Blitter* blitter, Uint32 event, const SDL_bool* value)
 {
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {48, 24, 16, 8};
+	widget.draw = draw_lock;
+	widget.click = click;
+
 	return (struct Switch) {
-		.widget = widget_init(),
-		.widget.rect = {48, 24, 16, 8},
-		.widget.draw = draw_lock,
-		.widget.click = click,
+		.widget = widget,
 		.blitter = blitter,
 		.event = event,
 		.value = value
@@ -560,14 +582,16 @@ static void drag_track(void* instance, int last_x, int last_y)
 		track->offset = max_x;
 }
 
-inline struct Track track_init(const struct Blitter* blitter, Uint32 event, const struct ProgramState* pstate)
+struct Track track_init(const struct Blitter* blitter, Uint32 event, const struct ProgramState* pstate)
 {
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {24, 72, 128, 64};
+	widget.draw = draw_track;
+	widget.click = click_track;
+	widget.drag = drag_track;
+
 	return (struct Track) {
-		.widget = widget_init(),
-		.widget.rect = {24, 72, 128, 64},
-		.widget.draw = draw_track,
-		.widget.click = click_track,
-		.widget.drag = drag_track,
+		.widget = widget,
 		.blitter = blitter,
 		.event = event,
 		.pstate = pstate,
@@ -575,7 +599,7 @@ inline struct Track track_init(const struct Blitter* blitter, Uint32 event, cons
 	};
 }
 
-inline void track_set_offset(struct Track* track, int offset)
+void track_set_offset(struct Track* track, int offset)
 {
 	// Left border
 	if (offset < -32) // 32 is the size of track border
@@ -712,14 +736,16 @@ static void drag_pattern(void* instance, int last_x, int last_y)
 		pat->offset = max_x;
 }
 
-inline struct Pattern pattern_init(const struct Blitter* blitter, Uint32 event, const struct ProgramState* pstate)
+struct Pattern pattern_init(const struct Blitter* blitter, Uint32 event, const struct ProgramState* pstate)
 {
+	Widget widget = widget_init();
+	widget.rect = (SDL_Rect) {24, 40, 128, 16};
+	widget.draw = draw_pattern;
+	widget.click = click_pattern;
+	widget.drag = drag_pattern;
+
 	return (struct Pattern) {
-		.widget = widget_init(),
-		.widget.rect = {24, 40, 128, 16},
-		.widget.draw = draw_pattern,
-		.widget.click = click_pattern,
-		.widget.drag = drag_pattern,
+		.widget = widget,
 		.blitter = blitter,
 		.event = event,
 		.pstate = pstate,

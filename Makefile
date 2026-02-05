@@ -1,3 +1,4 @@
+CC     = cc
 BINDIR = ./bin
 BLDDIR = ./build
 SRCDIR = ./src
@@ -7,7 +8,7 @@ DEPS   = $(OBJS:.o=.d)
 MODE   =
 
 LIBS     = -lSDL2 -lSDL2_mixer -lSDL2_image
-CFLAGS   = -std=c99 -Wall -pedantic
+CFLAGS   = -std=c11 -Wall -Wextra -pedantic -Werror -Wno-unused-parameter
 MAIN     = $(BINDIR)/pxdrummer
 
 ifeq ($(MODE),debug)

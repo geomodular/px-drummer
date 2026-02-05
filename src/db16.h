@@ -2,4 +2,4 @@
 
 #include <SDL2/SDL.h>
 
-const SDL_Color db16_pal[16];
+extern const SDL_Color db16_pal[16];

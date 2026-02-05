@@ -40,7 +40,7 @@ void screen_attach(void* widget)
 	last_widget = l;
 }
 
-void screen_detach_all()
+void screen_detach_all(void)
 {
 	struct Item* actual = last_widget;
 
@@ -51,7 +51,7 @@ void screen_detach_all()
 	}
 }
 
-void screen_draw()
+void screen_draw(void)
 {
 	struct Item* actual = last_widget;
 

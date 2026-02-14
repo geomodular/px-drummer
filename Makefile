@@ -1,4 +1,4 @@
-CC     = cc
+CC     = clang
 BINDIR = ./bin
 BLDDIR = ./build
 SRCDIR = ./src
@@ -7,8 +7,8 @@ OBJS   = $(addprefix $(BLDDIR)/, $(notdir $(SRCS:.c=.o)))
 DEPS   = $(OBJS:.o=.d)
 MODE   =
 
-LIBS     = -lSDL2 -lSDL2_mixer -lSDL2_image
-CFLAGS   = -std=c11 -Wall -Wextra -pedantic -Werror -Wno-unused-parameter
+LIBS     = -lSDL3
+CFLAGS   = -std=c23 -Wall -Wextra -Wpedantic -Wno-unused-parameter --embed-dir=./assets/
 MAIN     = $(BINDIR)/pxdrummer
 
 ifeq ($(MODE),debug)
@@ -32,15 +32,15 @@ $(BLDDIR):
 
 $(MAIN): | $(BINDIR)
 $(MAIN): $(OBJS)
-		$(CC) $(CFLAGS) $(CPPFLAGS) -o $@ $(OBJS) $(LIBS)
+		$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIBS)
 
 $(OBJS): | $(BLDDIR)
 $(BLDDIR)/%.o: $(SRCDIR)/%.c
-		$(CC) -c $(CFLAGS) $(CPPFLAGS) $< -o $@
+		$(CC) -c $(CFLAGS) $< -o $@
 
 $(DEPS): | $(BLDDIR)
 $(BLDDIR)/%.d: $(SRCDIR)/%.c
-		$(CC) $(CFLAGS) $(CPPFLAGS) -MM $< -MT $(@:.d=.o) > $@
+		$(CC) --embed-dir=./assets/ -MM $< -MT $(@:.d=.o) > $@
 
 clean:
 		@rm -rf $(BINDIR)

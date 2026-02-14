@@ -1,0 +1,6 @@
+-std=c23
+-Wall
+-Wextra
+-Wpedantic
+-Wno-unused-parameter
+--embed-dir=./assets/

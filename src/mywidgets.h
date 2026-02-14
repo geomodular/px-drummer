@@ -1,63 +1,61 @@
 #pragma once
 
-#include <SDL2/SDL.h>
-#include "blitter.h"
-#include "widget.h"
-#include "state.h"
+#include <SDL3/SDL_stdinc.h>
 
-typedef struct Button
-{
-	struct Widget widget;
-	const struct Blitter* blitter;
-	Uint32 event;
+#include "blitter.h"
+#include "state.h"
+#include "widget.h"
+
+typedef struct Button {
+  Widget widget;
+  const Blitter *blitter;
+  Uint32 event;
 } Button;
 
-Button btn_play_init(const struct Blitter* blitter, Uint32 event);
-Button btn_stop_init(const struct Blitter* blitter, Uint32 event);
-Button btn_tleft_init(const struct Blitter* blitter, Uint32 event);
-Button btn_tright_init(const struct Blitter* blitter, Uint32 event);
-Button btn_mleft_init(const struct Blitter* blitter, Uint32 event);
-Button btn_mright_init(const struct Blitter* blitter, Uint32 event);
-Button btn_plus_init(const struct Blitter* blitter, Uint32 event);
-Button btn_minus_init(const struct Blitter* blitter, Uint32 event);
-Button btn_clear_init(const struct Blitter* blitter, Uint32 event);
+Button btn_play_init(const Blitter *blitter, Uint32 event);
+Button btn_stop_init(const Blitter *blitter, Uint32 event);
+Button btn_tleft_init(const Blitter *blitter, Uint32 event);
+Button btn_tright_init(const Blitter *blitter, Uint32 event);
+Button btn_mleft_init(const Blitter *blitter, Uint32 event);
+Button btn_mright_init(const Blitter *blitter, Uint32 event);
+Button btn_plus_init(const Blitter *blitter, Uint32 event);
+Button btn_minus_init(const Blitter *blitter, Uint32 event);
+Button btn_clear_init(const Blitter *blitter, Uint32 event);
 
-struct Switch
-{
-	struct Widget widget;
-	const struct Blitter* blitter;
-	Uint32 event;
-	const SDL_bool* value;
-};
+typedef struct Switch {
+  Widget widget;
+  const Blitter *blitter;
+  Uint32 event;
+  const bool *value;
+} Switch;
 
-struct Switch sw_mute_init(const struct Blitter* blitter, Uint32 event, const SDL_bool* value);
-struct Switch sw_lock_init(const struct Blitter* blitter, Uint32 event, const SDL_bool* value);
+Switch sw_mute_init(const Blitter *blitter, Uint32 event, const bool *value);
+Switch sw_lock_init(const Blitter *blitter, Uint32 event, const bool *value);
 
-struct Track
-{
-	struct Widget widget;
-	const struct Blitter* blitter;
-	Uint32 event;
-	const struct ProgramState* pstate;
-	int offset;
-};
+typedef struct Track {
+  Widget widget;
+  const Blitter *blitter;
+  Uint32 event;
+  const ProgramState *pstate;
+  int offset;
+} Track;
 
-struct Track track_init(const struct Blitter* blitter, Uint32 event, const struct ProgramState* pstate);
-void track_set_offset(struct Track* track, int offset);
+struct Track track_init(const Blitter *blitter, Uint32 event,
+                        const ProgramState *pstate);
+void track_set_offset(Track *track, int offset);
 
-struct TrackFeedback
-{
-	int position;
-	int channel;
-};
+typedef struct TrackFeedback {
+  int position;
+  int channel;
+} TrackFeedback;
 
-struct Pattern
-{
-	struct Widget widget;
-	const struct Blitter* blitter;
-	Uint32 event;
-	const struct ProgramState* pstate;
-	int offset;
-};
+typedef struct Pattern {
+  Widget widget;
+  const Blitter *blitter;
+  Uint32 event;
+  const ProgramState *pstate;
+  int offset;
+} Pattern;
 
-struct Pattern pattern_init(const struct Blitter* blitter, Uint32 event, const struct ProgramState* pstate);
+Pattern pattern_init(const Blitter *blitter, Uint32 event,
+                     const ProgramState *pstate);
